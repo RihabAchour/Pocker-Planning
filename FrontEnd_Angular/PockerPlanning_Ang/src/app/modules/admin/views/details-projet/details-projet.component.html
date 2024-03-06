@@ -1,0 +1,101 @@
+<!-- Page main content START -->
+<div class="page-content-wrapper border">
+
+    <!-- Title -->
+    <div class="row">
+        <div class="col-12 mb-3">
+            <h1 class="h3 mb-2 mb-sm-0">Project Details</h1>
+        </div>
+    </div>
+            
+    <div class="row g-4">
+
+        <!-- Project information START -->
+        <div class="col-xxl-7">
+            <div class="card bg-transparent border rounded-3 h-100">
+
+                <!-- Card header -->
+                <div class="card-header bg-light border-bottom">
+                    <h5 class="card-header-title mb-0">Project Information</h5>
+                </div>
+
+                <!-- Card body START -->
+                <div class="card-body">
+                    <!-- Project details START -->
+                    <div class="row">
+                        <!-- Project Name -->
+                        <div class="col-md-6">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span class="fw-bold">Project Name:</span>
+                                    <span>{{ project.name }}</span>
+                                </li>
+                                <!-- Add other project details here -->
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span class="fw-bold">Start Date:</span>
+                                    <span>{{ project.startDate }}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span class="fw-bold">End Date:</span>
+                                    <span>{{ project.endDate }}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span class="fw-bold">Number of Developers:</span>
+                                    <span>{{ project.nbDeveloper }}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span class="fw-bold">Domain:</span>
+                                    <span>{{ project.domain }}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span class="fw-bold">Budget:</span>
+                                    <span>{{ project.badget }}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span class="fw-bold">Technology:</span>
+                                    <span>{{ project.technology }}</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Project Description -->
+                        <div class="col-md-6">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <span class="fw-bold">Description:</span>
+                                    <p>{{ project.objective }}</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Project details END -->
+                </div>
+                <!-- Card body END -->
+                <!-- Card footer -->
+                <div class="card-footer">
+                    <a class="btn btn-primary" [routerLink]="['/admin/assignDevelopers-project', project.id]">Add Developers</a>
+                </div>
+            </div>
+        </div>
+        <!-- Project information END -->
+
+        <!-- Student status chart START -->
+        <div class="col-xxl-5">
+            <!-- Add your student status chart here -->
+        </div>
+        <!-- Student status chart END -->
+    
+        <!-- Instructor course list START -->
+        <div class="col-12">
+            <!-- Add your instructor course list here -->
+        </div>
+        <!-- Instructor course list END -->
+
+        <!-- Student review START -->
+        <div class="col-12">
+            <!-- Add your student review section here -->
+        </div>
+        <!-- Student review END -->
+
+    </div> <!-- Row END -->
+</div>
+<!-- Page main content END -->

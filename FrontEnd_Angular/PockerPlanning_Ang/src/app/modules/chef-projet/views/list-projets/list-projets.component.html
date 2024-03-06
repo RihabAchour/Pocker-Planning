@@ -1,0 +1,100 @@
+<div class="card border bg-transparent rounded-3">
+    <!-- Card header START -->
+    <div class="card-header bg-transparent border-bottom">
+        <h3 class="mb-0">Projects List</h3>
+    </div>
+    <!-- Card header END -->
+
+    <!-- Card body START -->
+    <div class="card-body">
+
+        <!-- Search and select START -->
+        <div class="row g-3 align-items-center justify-content-between mb-4">
+            <!-- Search -->
+            <div class="col-md-8">
+                <form class="rounded position-relative">
+                    <input class="form-control pe-5 bg-transparent" type="search" placeholder="Search" aria-label="Search">
+                    <button class="bg-transparent p-2 position-absolute top-50 end-0 translate-middle-y border-0 text-primary-hover text-reset" type="submit">
+                        <i class="fas fa-search fs-6 "></i>
+                    </button>
+                </form>
+            </div>
+
+          <!-- Select option -->
+<div class="col-md-3">
+    <!-- Short by filter -->
+    <div class="input-group">
+        <select class="form-select js-choice border border-primary z-index-9 bg-transparent choices__input" aria-label=".form-select-sm" (change)="onSortChange($event)">
+            <option value="id">Sort by ID</option>
+            <option value="name">Sort by Name</option>
+            <option value="endDate">Sort by End Date</option>
+            <option value="badget">Sort by Budget</option>
+            <!-- Ajoutez d'autres options de tri ici -->
+        </select>
+        <!-- Flèches de tri -->
+        <button class="btn btn-link" (click)="toggleSortDirection()">
+            <i class="bi bi-arrow-up-circle-fill" *ngIf="sortDirection === 'asc'"></i>
+            <i class="bi bi-arrow-down-circle-fill" *ngIf="sortDirection === 'desc'"></i>
+          </button>
+    </div>
+</div>
+
+        <!-- Search and select END -->
+
+        <!-- Course list table START -->
+        <div class="table-responsive border-0">
+            <table class="table table-dark-gray align-middle p-4 mb-0 table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col" class="border-0 rounded-start">Project ID</th>
+                        <th scope="col" class="border-0">Project Name</th>
+                        <th scope="col" class="border-0">End Date</th>
+                        <th scope="col" class="border-0">Budget</th>
+                        <th scope="col" class="border-0">Status</th>
+                        <th scope="col" class="border-0">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let project of projects || []; let i = index ">
+                        <td>{{ project?.id }}</td>
+                        <td>{{ project?.name }}</td>
+                        <td>{{ project?.endDate }}</td>
+                        <td>{{project?.badget}}</td>
+                        <td>
+                            <span class="badge" [ngClass]="[
+                                project?.statusProject?.toString() === 'COMPLETED' ? 'bg-success' : '',
+                                project?.statusProject?.toString() === 'INPROGRESS' ? 'bg-primary' : '',
+                                project?.statusProject?.toString() === 'PANDING' ? 'bg-danger' : ''
+                            ]">
+                                {{ project?.statusProject }}
+                            </span>
+                        </td>
+                        <td>
+                            <a [routerLink]="['/chefProjet/update-project-chefp', project?.id]" class="btn btn-success-soft btn-round me-1 mb-1 mb-md-0" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Edit">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+                            <button class="btn btn-danger-soft btn-round me-1 mb-1 mb-md-0"
+                                (click)="deleteProject(project.id)"
+                                data-bs-toggle="tooltip"
+                                data-bs-placement="top"
+                                title=""
+                                data-bs-original-title="Delete">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                            <a [routerLink]="['/chefProjet/details-project-chefp', project?.id]" class="btn btn-sm btn-info-soft mb-0" data-bs-toggle="modal" data-bs-target="#viewReview">View</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div>
+                <pagination-controls
+                    previousLabel="Prev"
+                    nextLabel="Next"
+                    (pageChange)="OnTableDataChange($event)">
+                </pagination-controls>
+            </div>
+        </div>
+        <!-- Course list table END -->
+    </div>
+    <!-- Card body START -->
+</div>

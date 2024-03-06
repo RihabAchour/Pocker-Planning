@@ -1,0 +1,52 @@
+
+
+
+<div class="card bg-transparent border rounded-3">
+    <!-- Card header -->
+    <div class="card-header bg-transparent border-bottom">
+        <h3 class="card-header-title mb-0">Update Sprint</h3>
+    </div>
+     <!-- Card body START -->
+     <div class="card-body">
+        <form (ngSubmit)="updateSprint()" class="row g-4" style="margin: 0 auto;">
+            <!-- Input item: Project Name -->
+            <div class="col-lg-4">
+                <label class="form-label">Project Name</label>
+                <input type="text" class="form-control" placeholder="Project Name" [(ngModel)]="sprint.name" name="name">
+            </div>
+
+            <!-- Input item: Start Date -->
+            <div class="col-lg-4">
+                <label class="form-label">Start Date</label>
+                <input type="date" class="form-control" placeholder="Start Date" [(ngModel)]="sprint.startDate" name="startDate">
+            </div>
+
+            <!-- Input item: End Date -->
+            <div class="col-lg-4">
+                <label class="form-label">End Date</label>
+                <input type="date" class="form-control" placeholder="End Date" [(ngModel)]="sprint.endDate" name="endDate">
+            </div>
+
+            <!-- Input item: Number of Developers -->
+            <div class="col-lg-4">
+                <label class="form-label">Duration</label>
+                <input type="number" class="form-control" placeholder="Number of Developers" [(ngModel)]="sprint.duration" name="nbDeveloper">
+            </div>
+
+            <!-- Input item: Objective -->
+            <div class="col-12">
+                <label class="form-label">Objective</label>
+                <div class="objective-box">
+                    <textarea class="form-control" rows="3" [(ngModel)]="sprint.objective" name="objective"></textarea>
+                </div>
+                <div class="form-text">Enter the objective of the project</div>
+            </div>
+            <!-- Update button -->
+            <div class="col-lg-12">
+                <button type="submit" class="btn btn-primary">Update Sprint</button>
+            </div>
+
+        </form>
+    </div>
+    <!-- Card body END -->
+</div>

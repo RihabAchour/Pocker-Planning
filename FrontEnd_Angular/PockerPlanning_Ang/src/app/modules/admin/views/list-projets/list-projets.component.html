@@ -1,0 +1,197 @@
+<!-- DEBUT Search
+<nav class="navbar bg-body-tertiary">
+    <div class="container-fluid justify-content-end">
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success d-flex align-items-center px-4" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+   FIN Search-->
+  
+  
+  
+  
+<div class="page-content-wrapper border">
+
+    <!-- Title -->
+    <div class="row mb-3">
+        <div class="col-12">
+            <h1 class="h3 mb-0">Projects List</h1>
+        </div>
+        <div class="row justify-content-end">
+  <div class="col-auto">
+    <button class="btn btn-primary" (click)="generatePDFWithTable()">Generate PDF</button>
+  </div>
+</div>
+    </div>
+    
+<!-- Search and select START -->
+<div class="row mb-3">
+    <div class="col-md-6">
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Enter search criteria..." aria-label="Search Criteria" [(ngModel)]="searchCriteria" name="searchCriteria" (input)="applySearchFilter()">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+    <div class="col-md-6">
+      <div class="d-flex align-items-center justify-content-end">
+        <!-- Short by filter -->
+        <select class="form-select js-choice border-primary z-index-9 bg-transparent choices__input" aria-label=".form-select-sm" (change)="onSortChange($event)">
+          <option value="id">Sort by ID</option>
+          <option value="name">Sort by Name</option>
+          <option value="endDate">Sort by End Date</option>
+          <option value="badget">Sort by Budget</option>
+          <!-- Ajoutez d'autres options de tri ici -->
+        </select>
+  
+        <!-- Flèches de tri -->
+        <div class="ms-2">
+          <button class="btn btn-link" (click)="toggleSortDirection()">
+            <i class="bi bi-arrow-up-circle-fill" *ngIf="sortDirection === 'asc'"></i>
+            <i class="bi bi-arrow-down-circle-fill" *ngIf="sortDirection === 'desc'"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Search and select END -->
+  
+    <div class="row g-4 mb-4">
+    
+    </div> <!-- Row END -->
+    
+    <!-- All review table START -->
+    <div class="card bg-transparent border">
+
+        <!-- Card header START -->
+       
+        <!-- Card header END -->
+
+        <!-- Card body START -->
+        <div class="card-body pb-0">
+            <!-- Table START -->
+            <div class="table-responsive border-0">
+
+
+
+               <!--Ajouter liste déroulate pour choisir nbr d elements per page-->
+               <div>
+                <select (change)="OnTableSizeChange($event)">
+                 <option *ngFor="let size of tableSizes">
+                    {{size}}
+                </option>
+                </select>
+               </div>
+               <!--Fin Ajout liste deroulante-->
+
+
+               
+                <table class="table table-dark-gray align-middle p-4 mb-0 table-hover">
+                    <!-- Table head -->
+                    <thead>
+                        <tr>
+                            <th scope="col" class="border-0 rounded-start">Project ID</th>
+                            <th scope="col" class="border-0">Project Name</th>
+                            <th scope="col" class="border-0">End Date</th>
+                            <th scope="col" class="border-0">Domain</th>
+                            <th scope="col" class="border-0">Budget</th>
+                            <th scope="col" class="border-0">Status</th>
+                            <th scope="col" class="border-0">Action</th>
+                        </tr>
+                    </thead>
+                
+                    <!-- Table body START -->
+                    <tbody>
+                        <!-- Table row -->
+                        <tr *ngFor="let project of filteredProjects | paginate:{
+                            itemsPerPage: tableSize,
+                            currentPage: page,
+                            totalItems: count
+                        };    let i = index ">
+                            <!-- Table data -->
+                            <td>{{ project.id }}</td>
+                
+                            <!-- Table data -->
+                            <td>{{ project.name }}</td>
+                
+                
+                            <!-- Table data -->
+                            <td>{{ project.endDate }}</td>
+                
+                            <!-- Table data -->
+                            <td>{{ project.domain }}</td>
+                
+                            <td>{{ project.badget }}</td>
+                
+                            <!-- Table data -->
+    
+                            <td>
+                                <span class="badge" [ngClass]="[project.statusProject.toString() ==='COMPLETED' ? 'bg-success' : '', project.statusProject.toString() ==='INPROGRESS' ? 'bg-primary' : '',
+                            project.statusProject.toString() ==='PANDING' ? 'bg-danger' : '']">
+                                {{project.statusProject}}
+                                </span>
+                         </td>
+
+                         <td>
+                            <a [routerLink]="['/admin/update-project', project.id]" class="btn btn-success-soft btn-round me-1 mb-1 mb-md-0" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Edit">
+                                <i class="bi bi-pencil-square"></i>
+                              </a>
+                            <button class="btn btn-danger-soft btn-round me-1 mb-1 mb-md-0"
+                            (click)="deleteProject(project.id)"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="top"
+                            title=""
+                            data-bs-original-title="Delete">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                            <a [routerLink]="['/admin/details-project', project.id]" class="btn btn-sm btn-info-soft mb-0" data-bs-toggle="modal" data-bs-target="#viewReview">View</a>
+                        </td>
+                        </tr>
+                    </tbody>
+                    <!-- Table body END -->
+                </table>
+                <div>
+                    <pagination-controls
+                    previousLabel="Prev"
+                    nextLabel="Next"
+                    (pageChange)="OnTableDataChange($event)">
+                </pagination-controls>
+                </div>
+
+
+
+
+            </div>
+            <!-- Table END -->
+        </div>
+        <!-- Card body END -->
+
+        <!-- Card footer START -->
+        <div class="card-footer bg-transparent">
+         <!-- Pagination START -->
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+        <li class="page-item" [class.disabled]="page === 1">
+            <a class="page-link" (click)="OnTableDataChange(page - 1)" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li class="page-item" *ngFor="let pageNumber of getPageNumbers()" [class.active]="pageNumber === page">
+            <a class="page-link" (click)="OnTableDataChange(pageNumber)">{{ pageNumber }}</a>
+        </li>
+        <li class="page-item" [class.disabled]="page === getPageNumbers().length">
+            <a class="page-link" (click)="OnTableDataChange(page + 1)" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+<!-- Pagination END -->
+
+
+        </div>
+        <!-- Card footer END -->
+    </div>
+    <!-- All review table END -->
+</div>

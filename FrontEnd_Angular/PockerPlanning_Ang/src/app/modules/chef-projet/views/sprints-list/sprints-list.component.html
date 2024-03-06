@@ -1,0 +1,222 @@
+<!-- DEBUT Search-->
+<!--<nav class="navbar bg-body-tertiary">
+    <div class="container-fluid justify-content-end">
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success d-flex align-items-center px-4" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>-->
+  <!-- FIN Search-->
+  
+  <div class="card border bg-transparent rounded-3">
+    <!-- Card header START -->
+    <div class="card-header bg-transparent border-bottom d-flex justify-content-between align-items-center">
+        <h3 class="mb-0">Sprints List</h3>
+        <button type="button" class="btn btn-sm btn-primary" [routerLink]="['/chefProjet/create-sprint-chefp', projectId]">Add Sprint</button>
+    </div>
+    
+
+    <!-- Card header END -->
+
+    <!-- Card body START -->
+    <div class="card-body">
+
+        <!-- Search and select START -->
+        <div class="row g-3 align-items-center justify-content-between mb-4">
+            <!-- Search -->
+            <div class="col-md-8">
+                <form class="rounded position-relative">
+                    <input class="form-control pe-5 bg-transparent" type="search" placeholder="Search" aria-label="Search">
+                    <button class="bg-transparent p-2 position-absolute top-50 end-0 translate-middle-y border-0 text-primary-hover text-reset" type="submit">
+                <i class="fas fa-search fs-6 "></i>
+            </button>
+                </form>
+            </div>
+
+            <!-- Select option -->
+            <div class="col-md-3">
+                <!-- Short by filter -->
+                <form>
+                    <div class="choices" data-type="select-one" tabindex="0" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false"><div class="choices__inner"><select class="form-select js-choice border-0 z-index-9 bg-transparent choices__input" aria-label=".form-select-sm" hidden="" tabindex="-1" data-choice="active"><option value="" data-custom-properties="[object Object]">Sort by</option></select><div class="choices__list choices__list--single"><div class="choices__item choices__placeholder choices__item--selectable" data-item="" data-id="1" data-value="" data-custom-properties="[object Object]" aria-selected="true">Sort by</div></div></div><div class="choices__list choices__list--dropdown" aria-expanded="false"><input type="search" name="search_terms" class="choices__input choices__input--cloned" autocomplete="off" autocapitalize="off" spellcheck="false" role="textbox" aria-autocomplete="list" aria-label="Sort by" placeholder=""><div class="choices__list" role="listbox"><div id="choices--sq16-item-choice-5" class="choices__item choices__item--choice is-selected choices__placeholder choices__item--selectable is-highlighted" role="option" data-choice="" data-id="5" data-value="" data-select-text="Press to select" data-choice-selectable="" aria-selected="true">Sort by</div><div id="choices--sq16-item-choice-1" class="choices__item choices__item--choice choices__item--selectable" role="option" data-choice="" data-id="1" data-value="Free" data-select-text="Press to select" data-choice-selectable="">Free</div><div id="choices--sq16-item-choice-2" class="choices__item choices__item--choice choices__item--selectable" role="option" data-choice="" data-id="2" data-value="Most popular" data-select-text="Press to select" data-choice-selectable="">Most popular</div><div id="choices--sq16-item-choice-3" class="choices__item choices__item--choice choices__item--selectable" role="option" data-choice="" data-id="3" data-value="Most Viewed" data-select-text="Press to select" data-choice-selectable="">Most Viewed</div><div id="choices--sq16-item-choice-4" class="choices__item choices__item--choice choices__item--selectable" role="option" data-choice="" data-id="4" data-value="Newest" data-select-text="Press to select" data-choice-selectable="">Newest</div></div></div></div>
+                </form>
+            </div>
+        </div>
+        <!-- Search and select END -->
+
+        <!-- Course list table START -->
+        <div class="table-responsive border-0">
+            <table class="table table-dark-gray align-middle p-4 mb-0 table-hover">
+                  <!--Ajouter liste déroulate pour choisir nbr d elements per page-->
+               <div>
+                <select (change)="OnTableSizeChange($event)">
+                 <option *ngFor="let size of tableSizes">
+                    {{size}}
+                </option>
+                </select>
+               </div>
+               <!--Fin Ajout liste deroulante-->
+                <!-- Table head -->
+                <thead>
+                    <tr>
+                        <th scope="col" class="border-0 rounded-start">Sprint ID</th>
+                            <th scope="col" class="border-0">Sprint Name</th>
+                            <th scope="col" class="border-0">Start Date</th>
+                            <th scope="col" class="border-0">End Date</th>
+                            <th scope="col" class="border-0">Action</th>
+                    </tr>
+                </thead>
+
+                <!-- Table body START -->
+                <tbody>
+                    <!-- Table item -->
+                    <tr *ngFor="let sprint of sprints | paginate:{
+                        itemsPerPage: tableSize,
+                        currentPage: page,
+                        totalItems: count
+                    };    let i = index ">
+                        <!-- Table data -->
+                        <td>{{ sprint.id }}</td>
+            
+                        <!-- Table data -->
+                        <td>{{ sprint.name }}</td>
+            
+            
+                        <!-- Table data -->
+                        <td>{{ sprint.startDate }}</td>
+
+                        <!-- Table data -->
+                        <td>{{ sprint.endDate }}</td>
+            
+                        <!-- Table data -->
+                       
+            
+                    
+            
+
+                     <td>
+                        <a [routerLink]="['/chefProjet/update-sprint-chefp', projectId,sprint.id]" class="btn btn-success-soft btn-round me-1 mb-1 mb-md-0" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Edit">
+                            <i class="bi bi-pencil-square"></i>
+                          </a>
+                        <button class="btn btn-danger-soft btn-round me-1 mb-1 mb-md-0"
+                        (click)="deleteSprint(sprint.id)"
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="top"
+                        title=""
+                        data-bs-original-title="Delete">
+                    <i class="bi bi-trash"></i>
+                </button>
+                        <a [routerLink]="['/chefProjet/details-sprint-chefp', sprint.id]" class="btn btn-sm btn-info-soft mb-0" data-bs-toggle="modal" data-bs-target="#viewReview">View</a>
+                    </td>
+                    </tr>
+
+                </tbody>
+                <!-- Table body END -->
+            </table>
+            <div>
+                <pagination-controls
+                previousLabel="Prev"
+                nextLabel="Next"
+                (pageChange)="OnTableDataChange($event)">
+            </pagination-controls>
+            </div>
+        </div>
+        <!-- Course list table END -->
+
+   <!-- Pagination START -->
+   <nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+        <li class="page-item" [class.disabled]="page === 1">
+            <a class="page-link" (click)="OnTableDataChange(page - 1)" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li class="page-item" *ngFor="let pageNumber of getPageNumbers()" [class.active]="pageNumber === page">
+            <a class="page-link" (click)="OnTableDataChange(pageNumber)">{{ pageNumber }}</a>
+        </li>
+        <li class="page-item" [class.disabled]="page === getPageNumbers().length">
+            <a class="page-link" (click)="OnTableDataChange(page + 1)" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+<!-- Pagination END -->
+
+        
+     
+    </div>
+    <!-- Card body START -->
+</div>
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  

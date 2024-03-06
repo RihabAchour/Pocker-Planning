@@ -1,0 +1,82 @@
+
+
+<div class="border rounded-3">
+    <div class="row">
+        <div class="col-12">
+            <!-- Card START -->
+            <div class="card bg-transparent">
+                <!-- Card header START -->
+                <div class="card-header bg-transparent border-bottom">
+                    <h3 class="card-header-title">Project Details</h3>
+                </div>
+                <!-- Card header END -->
+
+               <!-- Card body START -->
+ <div class="card-body">
+    <!-- Project details START -->
+    <div class="row">
+        <!-- Project Name -->
+        <div class="col-md-6">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span class="fw-bold">Project Name:</span>
+                    <span>{{ project.name }}</span>
+                </li>
+                <!-- Add other project details here -->
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span class="fw-bold">Start Date:</span>
+                    <span>{{ project.startDate }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span class="fw-bold">End Date:</span>
+                    <span>{{ project.endDate }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span class="fw-bold">Number of Developers:</span>
+                    <span>{{ project.nbDeveloper }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span class="fw-bold">Domain:</span>
+                    <span>{{ project.domain }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span class="fw-bold">Budget:</span>
+                    <span>{{ project.badget }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span class="fw-bold">Technology:</span>
+                    <span>{{ project.technology }}</span>
+                </li>
+            </ul>
+        </div>
+        <!-- Project Description -->
+        <div class="col-md-6">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <span class="fw-bold">Description:</span>
+                    <p>{{ project.objective }}</p>
+                </li>
+            </ul>
+        </div>
+          <!-- Buttons -->
+          <div class="d-sm-flex justify-content-end">
+            <button type="button" class="btn btn-sm btn-primary me-2 mb-0"  [routerLink]="['/chefProjet/assignDevelopers-project-chefp', project.id]">Developers</button>
+            <button type="button" class="btn btn-sm btn-primary mb-0"  [routerLink]="['/chefProjet/list-sprints-chefp',project.id]">Sprints</button>
+
+        <!--  <a href="#" class="btn btn-sm btn-outline-secondary mb-0">Cancel</a>-->
+        </div>
+    </div>
+    <!-- Project details END -->
+</div>
+<!-- Card body END -->
+            </div>
+            <!-- Card END -->
+        </div> 	
+        <!-- Privacy END -->
+    </div>
+</div>
+
+
+
+
+ 

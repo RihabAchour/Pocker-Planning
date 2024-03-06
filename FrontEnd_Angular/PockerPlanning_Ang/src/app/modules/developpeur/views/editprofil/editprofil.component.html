@@ -1,0 +1,77 @@
+
+    <!-- Edit profile START -->
+    <div class="card bg-transparent border rounded-3">
+        <!-- Card header -->
+        <div class="card-header bg-transparent border-bottom">
+            <h3 class="card-header-title mb-0">Edit Profile</h3>
+        </div>
+        <!-- Card body START -->
+        <div class="card-body">
+            <!-- Form -->
+            <form class="row g-4"  [formGroup]="updateForm" (ngSubmit)="update()">
+
+                <!-- Profile picture -->
+                <div class="col-12 justify-content-center align-items-center">
+                    <label class="form-label">Profile picture</label>
+                    <div class="d-flex align-items-center">
+                        <label class="position-relative me-4" for="uploadfile-1" title="Replace this pic">
+                            <!-- Avatar place holder -->
+                            <span class="avatar avatar-xl">
+                                <img id="uploadfile-1-preview" class="avatar-img rounded-circle border border-white border-3 shadow" src="http://localhost:8980/PockerPlanning/auth/{{userconnect.picture}}" alt="">
+                            </span>
+                            <!-- Remove btn -->
+                            <button type="button" class="uploadremove"><i class="bi bi-x text-white"></i></button>
+                        </label>
+                        <!-- Upload button -->
+                        <input id="uploadfile-1" class="form-control d-none" type="file" name="image" (change)="handleFileInput($event)">
+                        <button class="btn btn-primary-soft mb-0" (click)="updateImg()">Change</button>
+                    </div>
+                </div>
+
+                <!-- Full name -->
+                <div class="col-md-6">
+                    <label class="form-label">firstname</label>
+                    <input class="form-control" type="text" formControlName="firstname">
+                </div>
+    
+                <div class="col-md-6">
+                    <label class="form-label">Lastname</label>
+                    <input class="form-control" type="text" formControlName="lastname">
+                </div>
+
+                <!-- Username -->
+               
+
+                <!-- Email id -->
+                <div class="col-md-6">
+                    <label class="form-label">Email Address</label>
+                    <input class="form-control" type="email"  formControlName="email">
+                </div>
+
+                <!-- Save button -->
+                <div class="d-sm-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary mb-0">Save changes</button>
+                </div>
+            </form>
+        </div>
+        <!-- Card body END -->
+    </div>
+    <!-- Edit profile END -->
+    
+    <div class="row g-4 mt-3">
+        <!-- Linked account START -->
+      
+        <!-- Linked account end -->
+
+        <!-- Social media profile START -->
+      
+        <!-- Social media profile END -->
+
+        <!-- EMail change START -->
+    
+        <!-- EMail change end -->
+
+        <!-- Password change START -->
+     
+        <!-- Password change end -->
+    </div>

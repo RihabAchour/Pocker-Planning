@@ -1,0 +1,126 @@
+<div class="card bg-transparent border rounded-3">
+    <!-- Card header -->
+    <div class="card-header bg-transparent border-bottom">
+        <h3 class="card-header-title mb-0">Create Project</h3>
+    </div>
+     <!-- Card body START -->
+     <div class="card-body">
+        <form [formGroup]="projectForm" (ngSubmit)="addProject()" class="row g-4" style="margin: 0 auto;">
+            <!-- Input item: Project Name -->
+            <div class="col-lg-4">
+                <label class="form-label">Project Name</label>
+                <input type="text" class="form-control" placeholder="Project Name" formControlName="name">
+                <div *ngIf="projectForm.get('name')?.errors?.['required'] && projectForm.get('name')?.touched" class="invalid-feedback">
+                  Project Name is required.
+                </div>
+                <div *ngIf="projectForm.get('name')?.errors?.['minlength'] && projectForm.get('name')?.touched" class="invalid-feedback">
+                  Project Name must be at least 5 characters long.
+                </div>
+                <div *ngIf="projectForm.get('name')?.errors?.['maxlength'] && projectForm.get('name')?.touched" class="invalid-feedback">
+                  Project Name cannot be more than 15 characters long.
+                </div>
+            </div>
+
+            <!-- Input item: Start Date -->
+            <div class="col-lg-4">
+                <label class="form-label">Start Date</label>
+                <input type="date" class="form-control" placeholder="Start Date" formControlName="startDate">
+                <div *ngIf="projectForm.get('startDate')?.errors?.['required'] && projectForm.get('startDate')?.touched" class="invalid-feedback">
+                  Start Date is required.
+                </div>
+            </div>
+
+            <!-- Input item: End Date -->
+            <div class="col-lg-4">
+                <label class="form-label">End Date</label>
+                <input type="date" class="form-control" placeholder="End Date" formControlName="endDate">
+                <div *ngIf="projectForm.get('endDate')?.errors?.['required'] && projectForm.get('endDate')?.touched" class="invalid-feedback">
+                  End Date is required.
+                </div>
+                <div *ngIf="projectForm.get('endDate')?.errors?.['dateComparison'] && projectForm.get('endDate')?.touched" class="invalid-feedback">
+                  End Date must be after Start Date.
+                </div>
+            </div>
+
+            <!-- Input item: Number of Developers -->
+            <div class="col-lg-4">
+                <label class="form-label">Number of Developers</label>
+                <input type="number" class="form-control" placeholder="Number of Developers" formControlName="nbDeveloper">
+                <div *ngIf="projectForm.get('nbDeveloper')?.errors?.['required'] && projectForm.get('nbDeveloper')?.touched" class="invalid-feedback">
+                  Number of Developers is required.
+                </div>
+                <div *ngIf="projectForm.get('nbDeveloper')?.errors?.['min'] && projectForm.get('nbDeveloper')?.touched" class="invalid-feedback">
+                  Number of Developers must be at least 5.
+                </div>
+                <div *ngIf="projectForm.get('nbDeveloper')?.errors?.['max'] && projectForm.get('nbDeveloper')?.touched" class="invalid-feedback">
+                  Number of Developers cannot be more than 8.
+                </div>
+            </div>
+
+            <!-- Input item: Objective -->
+            <div class="col-12">
+                <label class="form-label">Objective</label>
+                <div class="objective-box">
+                    <textarea class="form-control" rows="3" formControlName="objective"></textarea>
+                </div>
+                <div *ngIf="projectForm.get('objective')?.errors?.['required'] && projectForm.get('objective')?.touched" class="invalid-feedback">
+                  Objective is required.
+                </div>
+                <div *ngIf="projectForm.get('objective')?.errors?.['minlength'] && projectForm.get('objective')?.touched" class="invalid-feedback">
+                  Objective must be at least 10 characters long.
+                </div>
+                <div *ngIf="projectForm.get('objective')?.errors?.['maxlength'] && projectForm.get('objective')?.touched" class="invalid-feedback">
+                  Objective cannot be more than 100 characters long.
+                </div>
+            </div>
+
+            <!-- Input item: Technology -->
+            <div class="col-lg-4">
+                <label class="form-label">Technology</label>
+                <input type="text" class="form-control" placeholder="Technology" formControlName="technology">
+                <div *ngIf="projectForm.get('technology')?.errors?.['required'] && projectForm.get('technology')?.touched" class="invalid-feedback">
+                  Technology is required.
+                </div>
+            </div>
+
+            <!-- Input item: Budget -->
+            <div class="col-lg-4">
+                <label class="form-label">Budget</label>
+                <input type="number" class="form-control" placeholder="Budget" formControlName="badget">
+                <div *ngIf="projectForm.get('badget')?.errors?.['required'] && projectForm.get('badget')?.touched" class="invalid-feedback">
+                  Budget is required.
+                </div>
+            </div>
+
+            <!-- Dropdown item: Domain -->
+            <div class="col-lg-4">
+                <label class="form-label">Domain</label>
+                <select class="form-select" formControlName="domain">
+                    <option *ngFor="let domain of domainOptions" [value]="domain">{{ domain }}</option>
+                </select>
+                <div *ngIf="projectForm.get('domain')?.errors?.['required'] && projectForm.get('domain')?.touched" class="invalid-feedback">
+                  Domain is required.
+                </div>
+            </div>
+
+            <!-- Dropdown item: Status -->
+           <!-- Dropdown item: Status -->
+            <div class="col-lg-4">
+              <label class="form-label">Status</label>
+              <select class="form-select" formControlName="statusProject">
+                  <option *ngFor="let status of statusOptions" [value]="status">{{ status }}</option>
+              </select>
+              <div *ngIf="projectForm.get('statusProject')?.errors?.['required'] && projectForm.get('statusProject')?.touched" class="invalid-feedback">
+                  Status is required.
+              </div>
+            </div>
+
+            <!-- Save button -->
+            <div class="col-lg-12">
+                <button type="submit" class="btn btn-primary">Add Project</button>
+            </div>
+
+        </form>
+    </div>
+    <!-- Card body END -->
+</div>

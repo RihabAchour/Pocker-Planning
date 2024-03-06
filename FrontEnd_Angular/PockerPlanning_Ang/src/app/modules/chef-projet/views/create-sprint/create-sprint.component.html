@@ -1,0 +1,68 @@
+<div class="card bg-transparent border rounded-3">
+    <!-- Card header -->
+    <div class="card-header bg-transparent border-bottom">
+        <h3 class="card-header-title mb-0">Create Sprint</h3>
+    </div>
+    <!-- Card body START -->
+    <div class="card-body">
+        <form [formGroup]="sprintForm" (ngSubmit)="addSprint()" class="row g-4" style="margin: 0 auto;">
+            <!-- Input item: Sprint Name -->
+            <div class="col-lg-4">
+                <label class="form-label">Sprint Name</label>
+                <input type="text" class="form-control" placeholder="Sprint Name" formControlName="name">
+                <div *ngIf="sprintForm.get('name')?.touched && sprintForm.get('name')?.errors?.['required']" class="invalid-feedback">
+                  Sprint Name is required.
+                </div>
+            </div>
+
+            <!-- Input item: Start Date -->
+            <div class="col-lg-4">
+                <label class="form-label">Start Date</label>
+                <input type="date" class="form-control" placeholder="Start Date" formControlName="startDate">
+                <div *ngIf="sprintForm.get('startDate')?.touched && sprintForm.get('startDate')?.errors?.['required']" class="invalid-feedback">
+                  Start Date is required.
+                </div>
+            </div>
+
+            <!-- Input item: End Date -->
+            <div class="col-lg-4">
+                <label class="form-label">End Date</label>
+                <input type="date" class="form-control" placeholder="End Date" formControlName="endDate">
+                <div *ngIf="sprintForm.get('endDate')?.touched && sprintForm.get('endDate')?.errors?.['required']" class="invalid-feedback">
+                  End Date is required.
+                </div>
+            </div>
+
+            <!-- Input item: Duration -->
+            <div class="col-lg-4">
+                <label class="form-label">Duration</label>
+                <input type="number" class="form-control" placeholder="Duration" formControlName="duration" [attr.disabled]="true">
+                <div *ngIf="sprintForm.get('duration')?.touched && sprintForm.get('duration')?.errors?.['required']" class="invalid-feedback">
+                  Duration is required.
+                </div>
+            </div>
+
+            <!-- Input item: Objective -->
+            <div class="col-12">
+                <label class="form-label">Objective</label>
+                <textarea class="form-control" rows="3" formControlName="objective"></textarea>
+                <div *ngIf="sprintForm.get('objective')?.touched && sprintForm.get('objective')?.errors?.['required']" class="invalid-feedback">
+                  Objective is required.
+                </div>
+                <div *ngIf="sprintForm.get('objective')?.touched && sprintForm.get('objective')?.errors?.['minlength']" class="invalid-feedback">
+                  Objective must be at least {{ minObjectiveLength }} characters long.
+                </div>
+                <div *ngIf="sprintForm.get('objective')?.touched && sprintForm.get('objective')?.errors?.['maxlength']" class="invalid-feedback">
+                  Objective cannot be more than {{ maxObjectiveLength }} characters long.
+                </div>
+            </div>
+
+            <!-- Save button -->
+            <div class="col-lg-12">
+                <button type="submit" class="btn btn-primary">Add Sprint</button>
+            </div>
+
+        </form>
+    </div>
+    <!-- Card body END -->
+</div>
